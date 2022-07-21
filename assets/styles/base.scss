@@ -1,60 +1,34 @@
-// Replace this with your own font imports!
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;600;700&family=Source+Sans+Pro:wght@400;600&display=swap');
 :root {
-  --font-body: "Source Sans Pro";
-  --font-header: "Inter";
-  --font-mono: "Fira Code"
+  --lt-colours-light: var(--light) !important;
+  --lt-colours-lightgray: var(--lightgray) !important;
+  --lt-colours-dark: var(--secondary) !important;
+  --lt-colours-secondary: var(--tertiary) !important;
+  --lt-colours-gray: var(--outlinegray) !important;
 }
 
-// typography
-html {
-  scroll-behavior: smooth;
-  &:lang(ar) {
-    & p, & h1, & h2, & h3, article {
-      direction: rtl;
-      text-align: right;
-    }
-  }
-}
-
-.singlePage {
-  padding: 4em 30vw;
-  @media all and (max-width: 1200px) {
-    padding: 25px 5vw;
-  }
-}
-
-
-body {
-  margin: 0;
-  height: 100vh;
-  width: 100vw;
-  max-width: 100%;
-  box-sizing: border-box;
-  background-color: var(--light);
-}
-
-h1, h2, h3, h4, h5, h6, thead {
-  font-family: var(--font-header);
+h1, h2, h3, h4, h5, h6, ol, ul, thead {
+  font-family: Inter;
   color: var(--dark);
   font-weight: revert;
-  margin: 2rem 0 0;
-  padding: 2rem auto 1rem;
+  margin: revert;
+  padding: revert;
 
   &:hover > .hanchor {
-    color: var(--secondary);
+    opacity: 1;
   }
 }
 
 .hanchor {
-  font-family: var(--font-header);
-  opacity: 0.8;
-  transition: color 0.3s ease;
-  color: var(--dark);
+  font-family: Inter;
+  margin-left: -1em;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+  color: var(--secondary);
+
 }
 
-p, ul, text, a, tr, td, li, ol, ul {
-  font-family: var(--font-body);
+p, ul, text {
+  font-family: 'Source Sans Pro', sans-serif;
   color: var(--gray);
   fill: var(--gray);
   font-weight: revert;
@@ -62,26 +36,21 @@ p, ul, text, a, tr, td, li, ol, ul {
   padding: revert;
 }
 
-tbody, li, p {
-  line-height: 1.5em;
+.mainTOC {
+  background: var(--lightgray);
+  border-radius: 5px;
+  padding: 0.75em 1em;
 }
 
-.mainTOC {
-  border-radius: 5px;
-  padding: 0.75em 0;
+.mainTOC details summary {
+  cursor: zoom-in;
+  font-family: Inter;
+  color: var(--dark);
+  font-weight: 700;
+}
 
-  & details {
-    & summary {
-      cursor: zoom-in;
-      font-family: var(--font-header);
-      color: var(--dark);
-      font-weight: 700;
-    }
-
-    &[open] summary {
-      cursor: zoom-out;
-    }
-  }
+.mainTOC details[open] summary {
+    cursor: zoom-out;
 }
 
 #TableOfContents > ol {
@@ -106,30 +75,22 @@ tbody, li, p {
   }
 
   & > li::marker, & > li > ol > li::marker {
-    font-family: var(--font-body);
+    font-family: Source Sans Pro;
     font-weight: 700;
   }
 }
 
 table {
-  border: 1px solid var(--outlinegray);
   width: 100%;
-  padding: 1.5em;
-  border-collapse: collapse;
-}
-
-td, th {
-  padding: 0.2em 1em;
-  border: 1px solid var(--outlinegray);
 }
 
 img {
-  max-width: 100%;
+  width: 100%;
   border-radius: 3px;
   margin: 1em 0;
 }
 
-p > img + em {
+p>img+em {
   display: block;
   transform: translateY(-1em);
 }
@@ -138,11 +99,29 @@ sup {
   line-height: 0
 }
 
+p, tbody, li {
+  font-family: Source Sans Pro;
+  color: var(--gray);
+  line-height: 1.5em;
+}
+
 blockquote {
   margin-left: 0em;
   border-left: 3px solid var(--secondary);
   padding-left: 1em;
   transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: var(--tertiary);
+  }
+}
+
+table {
+  padding: 1.5em;
+}
+
+td, th {
+  padding: 0.1em 0.5em;
 }
 
 .footnotes p {
@@ -169,24 +148,31 @@ blockquote {
       background-color: transparent !important;
     }
 
-    & a[href$="#"], &.active a {
+    & a[href$="#"] {
       opacity: 0.2;
     }
   }
 }
 
-article {
-  & > h1 {
-    margin-top: 2em;
-    font-size: 2em;
+.section {
+  & h3 > a {
+    font-weight: 700;
+    font-family: Inter;
+    margin: 0;
   }
-  
+  & p {
+    margin-top: 0;
+  }
+}
+
+article {
   & > .meta {
-    margin: 0 0 1em 0;
+    margin: -1.5em 0 1em 0;
     opacity: 0.7;
   }
 
   & a {
+    font-family: Source Sans Pro;
     font-weight: 600;
 
     &.internal-link {
@@ -213,7 +199,6 @@ article {
   padding-left: 0;
 
   & .meta {
-    margin: 1.5em 0;
     & > h1 {
       margin: 0;
     }
@@ -249,37 +234,53 @@ sup > a {
   padding: 0 0.1em 0 0.2em;
 }
 
-#page-title {
-  margin: 0;
-  & > a {
-    font-family: var(--font-header);
-  }
-}
-
 a {
+  font-family: Inter, sans-serif;
   font-size: 1em;
   font-weight: 700;
   text-decoration: none;
   transition: all 0.2s ease;
   color: var(--secondary);
+
   &:hover {
     color: var(--tertiary) !important;
   }
 }
 
 pre {
-  font-family: var(--font-mono);
+  font-family: 'Fira Code';
   padding: 0.75em;
   border-radius: 3px;
   overflow-x: scroll;
 }
 
 code {
-  font-family: var(--font-mono);
+  font-family: 'Fira Code';
   font-size: 0.85em;
   padding: 0.15em 0.3em;
   border-radius: 5px;
   background: var(--lightgray);
+}
+
+html {
+  scroll-behavior: smooth;
+
+  &:lang(ar) {
+    & p, & h1, & h2, & h3, article {
+      direction: rtl;
+      text-align: right;
+    }
+  }
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  //overflow-x: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
+  background-color: var(--light);
 }
 
 @keyframes fadeIn {
@@ -305,6 +306,14 @@ hr {
   background-color: var(--dark);
 }
 
+.singlePage {
+  padding: 4em 30vw;
+
+  @media all and (max-width: 1200px) {
+    padding: 25px 5vw;
+  }
+}
+
 .page-end {
   display: flex;
   flex-direction: row;
@@ -321,8 +330,7 @@ hr {
   & > .backlinks-container {
     & > ul {
       list-style: none;
-      padding: 0;
-      margin: 0;
+      padding-left: 0;
 
       & > li {
         margin: 0.5em 0;
@@ -338,7 +346,6 @@ hr {
     border-radius: 5px;
     box-sizing: border-box;
     min-height: 250px;
-    margin: 0.5em 0;
 
     & > svg {
       margin-bottom: -5px;
@@ -351,15 +358,14 @@ hr {
   margin-top: 30vh;
 }
 
-.spacer {
-  flex: 1 1 auto;
+article > h1 {
+  font-size: 2em;
 }
 
 header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 1em 0 2em;
 
   & > h1 {
     font-size: 2em;
@@ -371,24 +377,15 @@ header {
     }
   }
 
-  #search-icon {
-    background-color: var(--lightgray);
-    border-radius: 4px;
-    height: 2em;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    & > p {
-      display: inline;
-      padding: 0 1.5em 0 2em;
-    }
+  & > .spacer {
+    flex: 1 1 auto;
   }
 
-  & svg {
+  & > svg {
     cursor: pointer;
     width: 18px;
     min-width: 18px;
-    margin: 0 0.5em;
+    margin: 0 1em;
 
     &:hover .search-path {
       stroke: var(--tertiary);
@@ -435,7 +432,7 @@ header {
     & > input {
       box-sizing: border-box;
       padding: 0.5em 1em;
-      font-family: var(--font-body);
+      font-family: Inter, sans-serif;
       color: var(--dark);
       font-size: 1.1em;
       border: 1px solid var(--outlinegray);
@@ -496,44 +493,23 @@ header {
 
 .section-ul {
   list-style: none;
-  margin-top: 2em;
   padding-left: 0;
 
-}
+  & > li {
+    border: 1px solid var(--outlinegray);
+    border-radius: 5px;
+    padding: 0 1em;
+    margin-bottom: 1em;
 
-.section-li {
-  margin-bottom: 1em;
-
-  & > .section {
-    display: flex;
-    align-items: center; 
-
-    @media all and (max-width: 600px) {
-      & .tags {
-        display: none;
-      }
-    }
-
-    & h3 > a {
+    & h3 {
+      opacity: 1;
       font-weight: 700;
-      margin: 0;
+      margin-bottom: 0em;
     }
-    
-    & p {
-      margin: 0;
-      padding-right: 1em;
-      flex-basis: 6em; 
+
+    & .meta {
+      opacity: 0.6;
     }
-  }
-
-  & h3 {
-    opacity: 1;
-    font-weight: 700;
-    margin: 0em;
-  }
-
-  & .meta {
-    opacity: 0.6;
   }
 }
 
@@ -546,23 +522,25 @@ header {
   1% {
     display: inline-block;
     opacity: 0;
+    transform: translate(-50%, 40%);
   }
   100% {
     opacity: 1;
     visibility: visible;
+    transform: translate(-50%, 20%);
   }
 }
 
 .popover {
   z-index: 999;
   position: absolute;
-  width: 20rem;
+  width: 20em;
   display: none;
   background-color: var(--light);
-  padding: 1rem;
-  margin: 1rem;
+  padding: 1em;
   border: 1px solid var(--outlinegray);
   border-radius: 5px;
+  transform: translate(-50%, 40%);
   pointer-events: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
   user-select: none;
@@ -576,29 +554,31 @@ header {
   &.visible {
     opacity: 1;
     visibility: visible;
+    transform: translate(-50%, 20%);
     display: inline-block;
     animation: dropin 0.2s ease;
   }
 
   & > h3 {
     font-size: 1rem;
-    margin: 0.25rem 0;
+    margin: 0.25em 0;
   }
 
   & > .meta {
-    margin-top: 0.25rem;
+    margin-top: 0.25em;
     opacity: 0.5;
-    font-family: var(--font-mono);
+    font-family: "JetBrains Mono", monospace;
     font-size: 0.8rem;
   }
 
   & > p, & > a {
-    font-size: 1rem;
-    margin: 0.7rem 0;
+    margin: 0;
     font-weight: 400;
     user-select: none;
   }
 }
+
+
 
 #contact_buttons ul {
   list-style-type: none;
@@ -611,4 +591,5 @@ header {
     padding: 0 1em;
   }
 }
+
 
